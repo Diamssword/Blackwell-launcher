@@ -1,6 +1,23 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  margin: auto;
-  max-width: 38rem;
-  padding: 2rem;
+@import '../fontawesome/css/all.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.centered-input
+{
+  @apply m-10 mr-auto ml-auto block relative w-8/12 h-10
+  rounded-3xl focus:rounded-xl hover:rounded-xl transition-all duration-300;
+}
+
+
+.profil-picker
+{
+  @apply m-10 mr-auto ml-auto flex w-11/12 h-20 border-2 border-gray-800;
+}
+.profil-picker-selected
+{
+  @apply ml-0 w-9/12  h-full flex-1 relative;
+}
+.profil-picker-small
+{
+  @apply m-0 flex w-9/12   h-20;
 }

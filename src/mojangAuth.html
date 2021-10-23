@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="compiled.css">
+</head>
+
+<body>
+
+    <input type="text" id="mail" placeholder="EMAIL" class="bg-red-500 centered-input" />
+    <input type="password" id="pass" placeholder="MDP" class="bg-red-500 centered-input" />
+    <input type="button" value="LOGIN" class="bg-red-500 centered-input" onclick="" />
+
+</body>
+<script>
+    const { ipcRenderer } = require('electron');
+    window.send = (channel, msg) => {
+        ipcRenderer.send(channel, msg)
+    }
+    window.on = (channel, callback) => {
+        ipcRenderer.on(channel, (ev, data) => { callback(data) });
+    }
+    function logIn()
+    {
+        let mdp=document.getElementById("pass").value;
+        let mail=document.getElementById("mail").value;
+        if(mdp && mail)
+            window.send('loginMojang',{mdp:mdp,mail:mail });
+    }
+</script>
+
+</html>
