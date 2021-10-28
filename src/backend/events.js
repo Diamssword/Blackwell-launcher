@@ -1,6 +1,7 @@
 
-const {ipcMain} = require("electron")
+const {ipcMain} = require("electron");
 const auths= require("./authSystems");
+const sendLogs = require("./logs").sendAllLogs;
 const preLaunch= require("./modpack/manager").readyLaunch;
 
 const game = require('./game');
@@ -38,4 +39,7 @@ ipcMain.on('pickProfile', (event, arg) => {
 });
 ipcMain.on('deleteProfile', (event, arg) => {
     global.profileManager.delete(arg);
+});
+ipcMain.on('fetchConsole', (event, arg) => {
+    sendLogs();
 });

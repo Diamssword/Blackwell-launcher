@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Console</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/compiled.css">
+</head>
+
+<body>
+
+ <div id="console" style="overflow: auto;" class="w-scree h-screen">
+</div>
+
+</body>
+<script>
+    const { ipcRenderer } = require('electron');
+    window.send = (channel, msg) => {
+        ipcRenderer.send(channel, msg)
+    }
+    window.on = (channel, callback) => {
+        ipcRenderer.on(channel, (ev, data) => { callback(data) });
+    }
+</script>
+
+<script>
+window.on('consoleIn', (data) => {
+    var enc = new TextDecoder("utf-8");
+    // let d =enc.decode(data)
+    let sp = data.split('\n');
+    for (k in sp)
+      document.getElementById('console').innerHTML += "<pre>" + sp[k] + "</pre>";
+  });
+  window.send("fetchConsole");
+</script>
+
+</html>

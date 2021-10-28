@@ -1,7 +1,8 @@
 const { app, BrowserWindow,ipcMain, systemPreferences } = require('electron');
 const path = require('path');
 const storage =require('./backend/storage');
- require('./backend/logs').init();
+ const logger =require('./backend/logs');
+ logger.init();
 const formatProfileForClient =require('./backend/utils').formatProfileForClient;
 require('./backend/events');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -30,7 +31,8 @@ const createWindow = () => {
   mainWindow.setMenu(null);
   mainWindow.on('closed',()=>{
     app.quit();
-  })
+  });
+  logger.createWindow();
   // and load the index.html of the app.
 
   mainWindow.loadFile(path.join(__dirname, './index.html'));

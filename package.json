@@ -39,8 +39,8 @@
   },
   "dependencies": {
     "@material-design-icons/font": "^0.10.0",
+    "ansi-to-html": "^0.7.2",
     "bent": "^7.3.12",
-    "chalk": "^4.1.2",
     "electron-squirrel-startup": "^1.0.0",
     "md5-file": "^5.0.0",
     "minecraft-launcher-core": "^3.16.8",
@@ -49,8 +49,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.3.7",
-    "electron-builder": "^22.13.1",
+    "chalk": "^4.1.2",
     "electron": "^15.1.0",
+    "electron-builder": "^22.13.1",
     "postcss": "^8.3.11",
     "postcss-cli": "^9.0.1",
     "tailwindcss": "^2.2.17"
