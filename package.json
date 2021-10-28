@@ -2,14 +2,29 @@
   "name": "blackwell-launcher",
   "productName": "blackwell-launcher",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Minecraft Custom launcher",
   "main": "src/index.js",
   "scripts": {
-    "start": "postcss ./src/index.css -o ./src/compiled.css -w | electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
+    "start": "electron src/index.js",
+    "compile": "postcss ./src/index.css -o ./src/compiled.css -w | electron src/index.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
     "lint": "echo \"No linting configured\""
+  },
+  "build": {
+    "appId": "OwlLauncher",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "extraResources": [
+      {
+        "from": "src/mirrorurl.json",
+        "to": "mirrorurl.json"
+      }
+    ]
   },
   "keywords": [],
   "author": {
@@ -18,46 +33,23 @@
   },
   "license": "MIT",
   "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "blackwell_launcher"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
-      ]
+    "win": {
+      "target": "portable "
     }
   },
   "dependencies": {
     "@material-design-icons/font": "^0.10.0",
+    "bent": "^7.3.12",
     "electron-squirrel-startup": "^1.0.0",
-    "minecraft-launcher-core": "^3.16.3",
-    "msmc": "^2.0.10"
+    "md5-file": "^5.0.0",
+    "minecraft-launcher-core": "^3.16.8",
+    "msmc": "^3.0.0-pre0",
+    "node-fetch": "2.0.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.57",
-    "@electron-forge/maker-deb": "^6.0.0-beta.57",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.57",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
-    "@electron-forge/maker-zip": "^6.0.0-beta.57",
     "autoprefixer": "^10.3.7",
-    "electron": "13.1.4",
+    "electron-builder": "^22.13.1",
+    "electron": "^15.1.0",
     "postcss": "^8.3.11",
     "postcss-cli": "^9.0.1",
     "tailwindcss": "^2.2.17"

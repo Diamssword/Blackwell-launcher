@@ -1,22 +1,18 @@
 const mc = require("minecraft-launcher-core").Client;
+const path = require("path");
+const fs = require("fs");
 module.exports={launch:launch}
 
-function launch(auth)
+function launch(auth,opts)
 {
-    let opts = {
-        clientPackage: null,
-        // We use a custom funtion here to emulate the authentication library, this should be nearly 100% compatible  
-        authorization: auth,
-        root: "./minecraft",
-        version: {
-            number: "1.14",
-            type: "release"
-        },
-        memory: {
-            max: "6G",
-            min: "4G"
-        }
-    }
+    if(!fs.existsSync(path.join(global.launcherDir,"instances")))
+        fs.mkdirSync(path.join(global.launcherDir,"instances"))
+    
+    if(!fs.existsSync(opts.root))
+        fs.mkdirSync(opts.root);
+
+    opts.authorization=auth;
+
     let launcher=new mc();
     console.log("Starting")
     launcher.launch(opts);

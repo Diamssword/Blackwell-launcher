@@ -22,11 +22,11 @@ module.exports = class ProfileManager {
     });
   }
   loadProfiles() {
-    var profstr = elecStorage.get("profiles");
-    this.profiles = {}
-    if (profstr)
-      this.profiles = JSON.parse(profstr);
-    this.selectedProfile = elecStorage.get("selectedProfile");
+    this.storage=elecStorage.create("accounts");
+    this.profiles = this.storage.get("profiles");
+    if (!this.profiles)
+      this.profiles = {}
+    this.selectedProfile = this.storage.get("selected");
 
     if (Object.keys(this.profiles).length <= 0) {
       this.failedCallback();
@@ -34,12 +34,12 @@ module.exports = class ProfileManager {
     }
     if (!this.selectedProfile || !this.profiles[this.selectedProfile]) {
       this.selectedProfile = this.profiles[Object.keys(this.profiles)[0]];
-      elecStorage.set("selectedProfile", this.selectedProfile)
+      this.storage.set("selected", this.selectedProfile)
     }
   }
   saveProfiles() {
-    elecStorage.set("profiles", JSON.stringify(this.profiles))
-    elecStorage.set("selectedProfile", this.selectedProfile)
+    this.storage.set("profiles", this.profiles)
+    this.storage.set("selected", this.selectedProfile)
   }
   autoAuth() {
     return new Promise((resolve, reject) => {

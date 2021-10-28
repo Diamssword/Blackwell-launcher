@@ -1,14 +1,19 @@
 const {BrowserWindow} = require("electron")
 const path = require("path")
 const msmc = require("msmc");
+const fetch = require("node-fetch");
+//msmc's testing enviroment sometimes runs into this issue that it can't load node fetch
+msmc.setFetch(fetch)
 function popupMicrosoft(callBackProfile) {
-    msmc.getElectron().FastLaunch(
-        (callback) => {
-            msmc.getMCLC().getAuth(callback).then((profile)=>{callBackProfile(profile)});
-        },
+    msmc.fastLaunch("electron",
         (update) => {
-        }
-    )
+
+        },"select_account",
+    ).then(  (callback) => {
+        callBackProfile(msmc.getMCLC().getAuth(callback))
+    },(err)=>{
+        console.log(err)
+    })
 
 }
 function popupMojang(callBackProfile) {

@@ -1,6 +1,7 @@
 
 const {ipcMain} = require("electron")
 const auths= require("./authSystems");
+const preLaunch= require("./modpack/manager").readyLaunch;
 
 const game = require('./game');
 const formatProfileForClient= require("./utils").formatProfileForClient;
@@ -29,7 +30,7 @@ ipcMain.on("launch", (data) => {
     global.profileManager.quickLaunch(()=>{return new Promise((resolve)=>{
         resolve({mail:"hdiamssword@gmail.com",pass:"20hesnoqqs"});
       });},(result)=>{
-        game.launch(result)
+        preLaunch(result)
       });
 });
 ipcMain.on('pickProfile', (event, arg) => {

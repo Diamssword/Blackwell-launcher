@@ -15,6 +15,12 @@ class ProfilePicker {
             }
             
         }
+        
+        if(!this.profiles.selected)
+        {
+            this.profiles.profiles["none"]={name:"no account"};
+            this.profiles.selected="none"
+        }
         d1=this.createElement(profiles.profiles[profiles.selected].name,profiles.selected);   
         d.append(d1);
         drop.classList.add("fa-solid","fa-angle-down","text-4xl","align-middle","ml-2")
@@ -77,7 +83,7 @@ class ProfilePicker {
             img1.src=this.profiles.profiles[id].img;    
         }
         else
-        img1.src="assets/head.png";
+        img1.src=  Math.random()>0.5?"assets/alex.png":"assets/steve.png";
         this.linkedImg[id]=img1;
         d1.append(img1);
         let text1 =document.createElement("i");

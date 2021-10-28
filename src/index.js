@@ -1,13 +1,15 @@
 const { app, BrowserWindow,ipcMain, systemPreferences } = require('electron');
 const path = require('path');
-require('./backend/storage');
+const storage =require('./backend/storage');
 const formatProfileForClient =require('./backend/utils').formatProfileForClient;
 require('./backend/events');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
-elecStorage.load();
+
+global.launcherDir= path.join(app.getPath('appData'),".owl_launcher");
+storage.initDefault(global.launcherDir);
 const ProfileManager =require('./backend/auth');
 let manager=new ProfileManager((err)=>{console.log(err)});
 global.profileManager=manager;
@@ -26,6 +28,7 @@ const createWindow = () => {
     app.quit();
   })
   // and load the index.html of the app.
+
   mainWindow.loadFile(path.join(__dirname, './index.html'));
 global.send =(channel,message)=>{ 
   mainWindow.webContents.send(channel,message)
