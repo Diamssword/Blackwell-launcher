@@ -1,6 +1,7 @@
 const { app, BrowserWindow,ipcMain, systemPreferences } = require('electron');
 const path = require('path');
 const storage =require('./backend/storage');
+ require('./backend/logs').init();
 const formatProfileForClient =require('./backend/utils').formatProfileForClient;
 require('./backend/events');
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
