@@ -1,0 +1,220 @@
+:root {
+  --normal-state-color : #474747;
+  --hovered-state-color: black;
+}
+
+@font-face {
+  font-family: "Futura Condensed";
+  src        : url("font/FuturaCondensedRegular.ttf");
+}
+
+::-webkit-scrollbar {
+  width : 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-thumb {
+  background   : rgba(0, 0, 0, 0);
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-track {
+  background   : rgba(166, 166, 166, 0.7);
+  border-radius: 0px;
+}
+
+html {
+  background-color: rgba(166, 166, 166, 0);
+}
+
+body {
+  background         : url("https://media.discordapp.net/attachments/822476964396924948/899685397125287936/2021-08-03_15.32.38.png?width=1276&height=676");
+  background-position: center;
+  background-size    : cover;
+  background-repeat  : none;
+  -moz-user-select   : none;
+  -webkit-user-select: none;
+  -ms-user-select    : none;
+  user-select        : none;
+  height             : 101.3vh;
+  width              : 98vw;
+  animation-duration : 2s;
+  animation-name     : appear;
+}
+
+
+.header {
+  z-index        : 8;
+  position       : absolute;
+  bottom         : 10px;
+  right          : 40px;
+  height         : 40vh;
+  width          : 20vw;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  color          : var(--hovered-state-color);
+}
+
+.nav_list {
+  display       : flex;
+  flex-direction: column;
+  align-items   : right;
+  gap           : 1em;
+  list-style    : none;
+  padding       : 0;
+  text-align    : right;
+  font-size     : 1.1em;
+  font-weight   : bold;
+}
+
+.nav_items {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family   : "Futura Condensed";
+  cursor        : pointer;
+  transition    : color 0.3s;
+  opacity       : 0.5;
+}
+
+.nav_items:after {
+  content    : "⮘";
+  position   : absolute;
+  margin-left: 10px;
+  margin-top : -3px;
+  opacity    : 0;
+  transform  : translateX(-2em);
+  transition : transform 0.4s, opacity 0.3s;
+}
+
+.nav_items:hover {
+  opacity: 0.8;
+}
+
+.nav_items:hover:after {
+  opacity  : 1;
+  transform: translateX(0em);
+}
+
+.title{
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family   : "Futura Condensed";
+  cursor        : pointer;
+  transition    : color 0.3s;
+  opacity       : 1;
+  font-weight: bold;
+  margin-bottom:1em;
+}
+
+.active {
+  transform   : scale(1.5) translateX(-0.8em);
+  color       : var(--hovered-state-color);
+  transition  : transform 0.6s;
+  opacity     : 1;
+  margin-top  : 2em;
+  margin-right: 15px;
+}
+
+.main {
+  z-index        : 1;
+  display        : flex;
+  align-items    : center;
+  flex-direction : column;
+  justify-content: center;
+  height         : 100vh;
+  margin-top     : -10px;
+  gap: 1em;
+}
+
+.active:after {
+  opacity  : 1;
+  transform: translateX(0em);
+}
+
+.bethesda_logo {
+  position: absolute;
+  right   : 5vw;
+  top     : 5vh;
+  width   : 5vw;
+}
+
+.background_image {
+  z-index           : 2;
+  width             : 50vw;
+  -webkit-transition: opacity 0.7s ease-in-out, margin-left 0.7s;
+  -moz-transition   : opacity 0.7s ease-in-out, margin-left 0.7s;
+  -o-transition     : opacity 0.7s ease-in-out, margin-left 0.7s;
+  transition        : opacity 0.7s ease-in-out, margin-left 0.7s;
+}
+
+.profile_picker{
+  background-color  : rgba(0, 0, 0, 0.445);
+  outline-offset    : -1em;
+  outline           : 2px solid rgba(166, 166, 166, 0.7);
+  padding:1em;
+  width: 30em;
+}
+
+footer {
+  position       : absolute;
+  bottom         : 0;
+  left           : 0;
+  height         : 20vh;
+  width          : 30vw;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  color          : var(--normal-state-color);
+}
+
+.social_list {
+  z-index       : 3;
+  display       : flex;
+  flex-direction: row;
+  gap           : 1em;
+  list-style    : none;
+  padding       : 0;
+  text-align    : right;
+  font-size     : 1.1em;
+}
+
+.social_svg {
+  cursor    : pointer;
+  transition: color 0.6s, transform 0.6s;
+}
+
+.social_svg:hover {
+  transform: scale(1.1);
+}
+
+.social_svg:hover path {
+  fill: black;
+}
+
+path {
+  transition: fill 0.6s;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+input {
+  border     : none;
+  background : transparent;
+  font-weight: bolder;
+  font-family   : "Futura Condensed";
+  padding-top:-6px;
+  cursor: pointer;
+}

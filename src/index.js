@@ -18,13 +18,16 @@ manager.loadProfiles();
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
   }
   });
+  mainWindow.setResizable(false);
+  mainWindow.setMenu(null);
   mainWindow.on('closed',()=>{
     app.quit();
   })
