@@ -154,7 +154,7 @@ function createLaunchParams(forgeInstallerData)
         memory:{
            
             max:forgeInstallerData.install.JVMarg.replace("-Xmx",""),
-            min:"1G"
+            min:"5G"
         },
         version:{
             number:forgeInstallerData.install.minecraft,
