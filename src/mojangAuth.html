@@ -5,14 +5,37 @@
     <meta charset="UTF-8">
     <title>Authentification MOJANG</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/compiled.css">
+    <link rel="stylesheet" href="css/style_moj_login.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+
 </head>
 
 <body>
-
-    <input type="text" id="mail" placeholder="EMAIL" class="" />
-    <input type="password" id="pass" placeholder="MDP" class="" />
-    <input type="button" value="LOGIN" class="" onclick="" />
+    <section id="main">
+        <img class="divider"
+            src="assets/divider.png"
+            alt="la lettre" width="100%" />
+        <h1>BlackWell University: <br />Connexion Mojang</h1>
+        <img class="divider"
+            src="assets/divider.png"
+            alt="la lettre" width="100%" />
+        <div style="display: flex; flex-direction:column;">
+            <label for="mail">Adresse Mail</label>
+            <input type="text" id="mail" placeholder="Adresse Mail" class="" />
+        </div>
+        <div style="display: flex; flex-direction:column;">
+            <label for="pass">Mot de Passe</label>
+            <input type="password" id="pass" placeholder="Mot de passe" class="" />
+        </div>
+        <center>
+            <input type="button" value="Se connecter" class="btn draw-border" onclick="" />
+        </center>
+        <hr>
+        <center>
+            <input id="close-btn" type="button" class="btn draw-border" value="Retour au launcher" class="" />
+        </center>
+    </section>
 
 </body>
 <script>
@@ -23,13 +46,16 @@
     window.on = (channel, callback) => {
         ipcRenderer.on(channel, (ev, data) => { callback(data) });
     }
-    function logIn()
-    {
-        let mdp=document.getElementById("pass").value;
-        let mail=document.getElementById("mail").value;
-        if(mdp && mail)
-            window.send('loginMojang',{mdp:mdp,mail:mail });
+    function logIn() {
+        let mdp = document.getElementById("pass").value;
+        let mail = document.getElementById("mail").value;
+        if (mdp && mail)
+            window.send('loginMojang', { mdp: mdp, mail: mail });
     }
+
+    document.getElementById("close-btn").addEventListener("click", function (e) {
+        window.close();
+    });
 </script>
 
 </html>
