@@ -18,13 +18,16 @@ function popupMicrosoft(callBackProfile) {
 }
 function popupMojang(callBackProfile) {
     const authWin = new BrowserWindow({
-        width: 600,
+        width: 400,
         height: 600,
+        frame: false,
         webPreferences: {
           nodeIntegration: true,
           contextIsolation: false,
       }
       });
+      authWin.setResizable(false);
+      authWin.setMenu(null);
       global.on("loginMojang",(ev,args)=>{
           global.profileManager.addProfile(args.mail, args.mdp).then((res)=>{
               authWin.close();
