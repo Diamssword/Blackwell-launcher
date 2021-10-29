@@ -25,12 +25,13 @@
 </script>
 
 <script>
+    const consoleH=  document.getElementById('console');
 window.on('consoleIn', (data) => {
-    var enc = new TextDecoder("utf-8");
-    // let d =enc.decode(data)
-    let sp = data.split('\n');
-    for (k in sp)
-      document.getElementById('console').innerHTML += "<pre>" + sp[k] + "</pre>";
+  
+
+    consoleH.innerHTML += "<pre>" + data + "</pre>";
+      if (consoleH.scrollTop / consoleH.scrollHeight > 0.8)
+      consoleH.scrollTop = consoleH.scrollHeight;
   });
   window.send("fetchConsole");
 </script>
