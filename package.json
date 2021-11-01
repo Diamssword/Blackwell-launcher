@@ -17,7 +17,7 @@
       "category": "your.app.category.type"
     },
     "win": {
-      "targetDisabbled": "portable" //la version portable trigger l'antivirus
+      "targetDisabbled": "portable" 
     },
     "extraResources": [
       {
