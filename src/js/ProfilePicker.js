@@ -61,12 +61,6 @@ class ProfilePicker {
         this.createList();
 
     }
-    updateIcon(id,url)
-    {
-        this.profiles.profiles[id].img=url;
-        if(this.linkedImg[id])
-            this.linkedImg[id].src=url;
-    }
     createElement(text,id,small)
     {
         let cont=this;
@@ -78,12 +72,10 @@ class ProfilePicker {
         });
     }
         let img1=document.createElement("img");
-        if(this.profiles.profiles[id].img)
-        {
-            img1.src=this.profiles.profiles[id].img;    
-        }
-        else
-        img1.src=  Math.random()>0.5?"assets/alex.png":"assets/steve.png";
+        getImageFromUUID(this.profiles.profiles[id].uuid,(url)=>{
+            img1.src=url;
+        })
+     
         this.linkedImg[id]=img1;
         d1.append(img1);
         let text1 =document.createElement("i");

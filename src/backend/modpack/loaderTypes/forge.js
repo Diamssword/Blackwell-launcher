@@ -154,13 +154,12 @@ function createLaunchParams(forgeInstallerData)
         memory:{
            
             max:forgeInstallerData.install.JVMarg.replace("-Xmx",""),
-            min:"5G"
+            min:"3G"
         },
         version:{
             number:forgeInstallerData.install.minecraft,
             type:"release",
-       },
-       javaPath:"D:/Program Files/AdoptOpenJDK/jdk-8.0.232.09-hotspot/bin/java.exe" //besoin de java 8 pour la 1.12
+       }
     }
     if(forgeInstallerData.install.forge)
     {

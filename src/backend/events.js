@@ -29,7 +29,7 @@ ipcMain.on("requestProfiles", (data) => {
 ipcMain.on("launch", (data) => {
    
     global.profileManager.quickLaunch(()=>{return new Promise((resolve)=>{
-        resolve({mail:"hdiamssword@gmail.com",pass:"20hesnoqqs"});
+        resolve({mail:"TODO",pass:"1234"});
       });},(result)=>{
         preLaunch(result)
       });

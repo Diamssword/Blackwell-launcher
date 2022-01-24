@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Java</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+</head>
+
+<body>
+    <section id="main">
+        <input type="text" value="-"/>
+    </section>
+
+</body>
+<script>
+    const { ipcRenderer } = require('electron');
+    window.send = (channel, msg) => {
+        ipcRenderer.send(channel, msg)
+    }
+    window.on = (channel, callback) => {
+        ipcRenderer.on(channel, (ev, data) => { callback(data) });
+    }
+    function logIn() {
+        let mdp = document.getElementById("pass").value;
+        let mail = document.getElementById("mail").value;
+        if (mdp && mail)
+            window.send('loginMojang', { mdp: mdp, mail: mail });
+    }
+
+    document.getElementById("close-btn").addEventListener("click", function (e) {
+        window.close();
+    });
+</script>
+
+</html>

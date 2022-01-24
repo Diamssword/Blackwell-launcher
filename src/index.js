@@ -27,12 +27,13 @@ const createWindow = () => {
       contextIsolation: false,
   }
   });
+  console.log(process.env)
   mainWindow.setResizable(false);
-  mainWindow.setMenu(null);
+  //mainWindow.setMenu(null);
   mainWindow.on('closed',()=>{
     app.quit();
   });
-  logger.createWindow();
+  //logger.createWindow();
   // and load the index.html of the app.
 
   mainWindow.loadFile(path.join(__dirname, './index.html'));

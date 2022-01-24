@@ -77,10 +77,6 @@
   window.on = (channel, callback) => {
     ipcRenderer.on(channel, (ev, data) => { callback(data) });
   }
-  ipcRenderer.on("skin", (ev, data) => {
-
-    extractHeadFromSkin(data)
-  })
 
   document.getElementById("close-btn").addEventListener("click", function (e) {
     window.close();
@@ -111,10 +107,5 @@
   });
   window.on("updateProfiles", (prof) => {
     profilePicker.loadProfiles(prof);
-  });
-  window.on("updateIcon", (data) => {
-    extractHeadFromSkin(data.img, (res) => {
-      profilePicker.updateIcon(data.id, res)
-    })
   });
 </script>
