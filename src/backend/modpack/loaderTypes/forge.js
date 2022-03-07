@@ -88,24 +88,30 @@ function getMap()
 }
 function purgeOldFile()
 {
+
     let checked=[];
     for(k in concerned)
     {
-        let dir=path.join(route,k)
+        let dir=path.join(route,concerned[k])
+        
         if(fs.existsSync(dir))
         {
-            let files =fs.readdirSync(dir);
+            let files =fs.readdirSync(dir)
             for(k in files)
             {
-                let sum =md5File.sync(k)
+               const dir2=path.join(dir,files[k]);
+                if(fs.existsSync(dir2) && fs.lstatSync(dir2).isFile())
+                {
+                let sum =md5File.sync(dir2)
                 if(!md5Map[sum])
                 {
-                    fs.rm(k);
+                    fs.rm(dir2);
                 }
                 else
                 {
                     checked.push(sum);
                 }
+            }
             }
             
         }

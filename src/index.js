@@ -1,5 +1,7 @@
 const { app, BrowserWindow,ipcMain, systemPreferences } = require('electron');
 const path = require('path');
+
+global.launcherDir= path.join(app.getPath('appData'),".owl_launcher");
 const storage =require('./backend/storage');
  const logger =require('./backend/logs');
  logger.init();
@@ -10,8 +12,8 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
-global.launcherDir= path.join(app.getPath('appData'),".owl_launcher");
 storage.initDefault(global.launcherDir);
+require("./backend/settings")
 const ProfileManager =require('./backend/auth');
 let manager=new ProfileManager((err)=>{console.log(err)});
 global.profileManager=manager;
@@ -27,7 +29,6 @@ const createWindow = () => {
       contextIsolation: false,
   }
   });
-  console.log(process.env)
   mainWindow.setResizable(false);
   //mainWindow.setMenu(null);
   mainWindow.on('closed',()=>{

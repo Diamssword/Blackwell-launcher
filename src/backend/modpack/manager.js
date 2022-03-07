@@ -1,10 +1,7 @@
-const {app} = require("electron");
 const path = require("path");
-const util = require("../utils");
 const game = require("../game");
 const fs= require("fs");
-const { off } = require("process");
-var mainFile;
+const jSettings= require("../settings");
 module.exports={
     readyLaunch,
     getForgeDlLink
@@ -14,7 +11,6 @@ async function readyLaunch(auths)
     if(!fs.existsSync(path.join(global.launcherDir,"instances")))
     fs.mkdirSync(path.join(global.launcherDir,"instances"));
     let jpath= await getJavaPath();
-    console.log(jpath);
     let rlPath=path.join(__dirname, '..','..','modpack.json');
     if(!fs.existsSync(rlPath))                  //load file on compiled environement
        rlPath= path.join(process.resourcesPath, 'modpack.json')
@@ -23,8 +19,18 @@ async function readyLaunch(auths)
     const loader =require("./loaderTypes/"+source.type);
     if(loader)
     loader(source,(opts)=>{
-        
+        if(!jpath.endsWith("java.exe"))
         opts.javaPath=path.join(jpath,"bin","java.exe");
+        else
+        opts.javaPath=jpath;
+        var ram=jSettings.get("ram")
+        if(ram)
+        {
+            if(!isNaN(ram))
+            {
+                opts.memory.max=ram+"G";
+            }
+        }
         game.launch(auths,opts)
     });
     }catch(err)
@@ -37,8 +43,8 @@ async function readyLaunch(auths)
 function getJavaPath()
 {
     return new Promise((res,err)=>{
-        let path=global.elecStorage.get("java_path");
-        if(!path)
+        let path=jSettings.get("path");
+        if(!path || path.length<2)
         path="default";
         if(path =="default")
         {

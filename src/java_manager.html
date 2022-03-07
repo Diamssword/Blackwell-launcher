@@ -10,25 +10,43 @@
 
 <body>
     <section id="main">
-        <input type="text" value="-"/>
+        <input type="text" id="java" placeholder="Chemin Java" value="default"/>
+        <button onClick="sendJava()">Sauvegarder</button>
+        <br>
+        RAM Max<input id="ram" onchange="sendRam()"type="number" value="4"/>G
+        <br>
+        <button id="close-btn">Fermer</button>
     </section>
 
 </body>
 <script>
     const { ipcRenderer } = require('electron');
+
     window.send = (channel, msg) => {
         ipcRenderer.send(channel, msg)
     }
     window.on = (channel, callback) => {
         ipcRenderer.on(channel, (ev, data) => { callback(data) });
     }
-    function logIn() {
-        let mdp = document.getElementById("pass").value;
-        let mail = document.getElementById("mail").value;
-        if (mdp && mail)
-            window.send('loginMojang', { mdp: mdp, mail: mail });
+    function setParams(key,value) {
+        let obj={};
+        obj[key]=value;
+            window.send('setParams', obj);
     }
-
+    window.on("settings.get",(data)=>{
+        if(data["path"])
+            document.getElementById("java").value=data["path"]
+        if(data["ram"])
+            document.getElementById("ram").value=data["ram"]
+    })
+    function sendJava()
+    {
+        window.send("settings.set",['path',document.getElementById("java").value]);
+    }
+    function sendRam()
+    {
+        window.send("settings.set",['ram',document.getElementById("ram").value]);
+    }
     document.getElementById("close-btn").addEventListener("click", function (e) {
         window.close();
     });

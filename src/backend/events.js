@@ -3,8 +3,8 @@ const {ipcMain} = require("electron");
 const auths= require("./authSystems");
 const sendLogs = require("./logs").sendAllLogs;
 const preLaunch= require("./modpack/manager").readyLaunch;
-
-const game = require('./game');
+const {BrowserWindow} =require('electron')
+const path = require('path');
 const formatProfileForClient= require("./utils").formatProfileForClient;
 
 ipcMain.on('open', (event, arg) => {
@@ -19,6 +19,23 @@ ipcMain.on('open', (event, arg) => {
         auths.popupMojang((profile)=>{
             global.send("updateProfiles", formatProfileForClient());
           });
+    }
+    else  if(arg=="settings")
+    {
+       var settingsWin = new BrowserWindow({
+            width: 400,
+            height: 600,
+            frame: false,
+            webPreferences: {
+              nodeIntegration: true,
+              contextIsolation: false,
+          }
+          });
+          settingsWin.setResizable(false);
+     //     settingsWin.setMenu(null);
+          
+          settingsWin.loadFile(path.join(__dirname, "../java_manager.html"));
+          settingsWin.webContents.send("settings.get",require("../backend/settings").getAll())
     }
 });
 

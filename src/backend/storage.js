@@ -31,7 +31,6 @@ class StorageInstance {
     this.file=this.load(launcherDir?launcherDir:global.launcherDir,file);
     }
     load(launcherdir,file) {
-  
             let f1 = path.join(launcherdir, file+".json")
         if (!fs.existsSync(launcherdir))
             fs.mkdirSync(launcherdir);
@@ -49,6 +48,10 @@ class StorageInstance {
     get(key)
     {
         return this.storage[key];
+    }
+    getAll()
+    {
+        return this.storage;
     }
     set(key,value)
     {

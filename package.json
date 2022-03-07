@@ -17,12 +17,12 @@
       "category": "your.app.category.type"
     },
     "win": {
-      "targetDisabbled": "portable"
+     
     },
     "extraResources": [
       {
-        "from": "src/mirrorurl.json",
-        "to": "mirrorurl.json"
+        "from": "src/settings.json",
+        "to": "settings.json"
       }
     ]
   },
