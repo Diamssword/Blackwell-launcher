@@ -34,8 +34,8 @@ ipcMain.on('open', (event, arg) => {
           settingsWin.setResizable(false);
      //     settingsWin.setMenu(null);
           
-          settingsWin.loadFile(path.join(__dirname, "../java_manager.html"));
-          settingsWin.webContents.send("settings.get",require("../backend/settings").getAll())
+          settingsWin.loadFile(path.join(__dirname, "../settings.html"));
+          
     }
 });
 

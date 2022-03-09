@@ -12,8 +12,14 @@ var writingStream;
 
 function sendAllLogs() {
     
-    console.error("testing")
    // window.send("consoleIn", convert.toHtml(fs.readFileSync(path.join(__dirname, "..", "logs.txt")).toString()));
+}
+function removeWindow()
+{
+    if(window)
+    {
+        window.destroy();
+    }
 }
 function createWindow() {
     window = new BrowserWindow({
@@ -78,4 +84,4 @@ function getFileStream() {
     }
     return writingStream;
 }
-module.exports = { init: initLogger, readStream: readStream, createWindow: createWindow, sendAllLogs }
+module.exports = { init: initLogger, readStream: readStream, createWindow: createWindow, sendAllLogs,removeWindow:removeWindow }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Java</title>
+    <title>Paramètres</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -17,14 +17,16 @@
             <section id="main" style="display: flex; flex-direction:column; gap:3em; width:100%;">
                 <div class="form-group">
                     <label>Chemin vers Java :</label>
-                    <input type="text" class="form-control" id="java" placeholder="Chemin Java" value="default" />
-                    <button class="btn btn-outline-dark" onClick="sendJava()">Sauvegarder</button>
+                    <input type="text" class="form-control" id="java" placeholder="Chemin Java" value="default" onChange="sendJava()" onkeyup="this.onchange()" onpaste="this.onchange()" oninput="this.onchange()"/>
+                   
                 </div>
                 <div class="form-group">
                     <label>RAM Max :</label>
                     <input id="ram" class="form-control" onchange="sendRam()" type="number" value="4" />
                     <small id="emailHelp" class="form-text text-muted">Exprimé en Go</small>
                 </div>
+                <div><button id="console" class="btn btn-outline-dark" onclick="sendBtn()">Afficher Console</button></div>
+                
                 <button id="close-btn" class="btn btn-outline-dark">Fermer</button>
             </section>
         </div>
@@ -45,18 +47,28 @@
         obj[key] = value;
         window.send('setParams', obj);
     }
+    var consoleOn=false;
     window.on("settings.get", (data) => {
-        if (data["path"])
-            document.getElementById("java").value = data["path"]
+        console.log(data)
+        if (data["javaPath"])
+            document.getElementById("java").value = data["javaPath"]
         if (data["ram"])
             document.getElementById("ram").value = data["ram"]
+            consoleOn = data["console"]?true:false;
+            document.getElementById("console").innerText= (consoleOn?"Cacher":"Afficher")+ " Console";
     })
     function sendJava() {
-        window.send("settings.set", ['path', document.getElementById("java").value]);
+        window.send("settings.set", ['javaPath', document.getElementById("java").value]);
     }
     function sendRam() {
         window.send("settings.set", ['ram', document.getElementById("ram").value]);
     }
+    function sendBtn() {
+        consoleOn =!consoleOn;
+        window.send("settings.set", ['console', consoleOn]);
+        document.getElementById("console").innerText= (consoleOn?"Cacher":"Afficher")+ " Console";
+    }
+    window.send("settings.get",{});
     document.getElementById("close-btn").addEventListener("click", function (e) {
         window.close();
     });

@@ -3,6 +3,7 @@ const path = require('path');
 
 global.launcherDir= path.join(app.getPath('appData'),".owl_launcher");
 const storage =require('./backend/storage');
+const settings =require('./backend/settings');
  const logger =require('./backend/logs');
  logger.init();
 const formatProfileForClient =require('./backend/utils').formatProfileForClient;
@@ -34,7 +35,9 @@ const createWindow = () => {
   mainWindow.on('closed',()=>{
     app.quit();
   });
-  //logger.createWindow();
+  if(settings.get("console"))
+    logger.createWindow();
+    mainWindow.moveTop();
   // and load the index.html of the app.
 
   mainWindow.loadFile(path.join(__dirname, './index.html'));
@@ -71,3 +74,14 @@ app.on('activate', () => {
 });
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+global.progress={title:(title)=>
+{
+    global.send("progress.title",title)
+},
+value:(progress)=>
+{
+    global.send("progress.progress",progress)
+},
+total:(etape,total)=>{
+  global.send("progress.total",[etape,total]);
+}}

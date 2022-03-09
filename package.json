@@ -16,9 +16,7 @@
     "mac": {
       "category": "your.app.category.type"
     },
-    "win": {
-     
-    },
+    "win": {},
     "extraResources": [
       {
         "from": "src/settings.json",
@@ -46,7 +44,8 @@
     "md5-file": "^5.0.0",
     "minecraft-launcher-core": "^3.16.8",
     "msmc": "^3.0.0-pre0",
-    "node-fetch": "2.0.0"
+    "node-fetch": "2.0.0",
+    "node-fetch-progress": "^1.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.7",

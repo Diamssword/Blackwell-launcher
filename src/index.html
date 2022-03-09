@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="css/compiled.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 
 <body id="body">
@@ -15,15 +17,16 @@
     <nav class="navigation">
       <h1 class="title">Méthode de connexion :</h1>
       <ul class="nav_list" id="nav_list">
-        <li class="nav_items ">
-          <input type="button" value="MOJANG" class="" onclick="window.send('open','mojang')" />
-        </li>
-        <li class="nav_items"><input type="button" value="MICROSOFT" class=""
-            onclick="window.send('open','microsoft')" /></li>
-        <li class="nav_items active"> <input type="button" value="Rejoindre l'université !" class="" onclick="window.send('launch')" />
-        </li>
-        <li class="nav_items"> <input id="close-btn" type="button" value="QUITTER" class="" />
-        </li>
+        <! -- <li class="nav_items ">
+          <! -- <input type="button" value="MOJANG" class="" onclick="window.send('open','mojang')" />
+          <! -- </li>
+            <li class="nav_items"><input type="button" value="MICROSOFT" class=""
+                onclick="window.send('open','microsoft')" /></li>
+            <li class="nav_items active"> <input type="button" value="Rejoindre l'université !" class=""
+                onclick="window.send('launch')" />
+            </li>
+            <li class="nav_items"> <input id="close-btn" type="button" value="QUITTER" class="" />
+            </li>
       </ul>
     </nav>
   </header>
@@ -33,20 +36,32 @@
     <img class="background_image" id="bg_img"
       src="https://cdn.discordapp.com/attachments/822476964396924948/899333000628666418/LOGO_BW2.png" alt=""></img>
     <div class="front-text" id="front-text">
-    <div id="ProfilePicker" class="profile_picker">
-    </div>
+      <div id="ProfilePicker" class="profile_picker">
+      </div>
+      </div>
+      <div>
+        <p id="progressTotalText">Total (1/1)</p>
+      <progress id="progressTotal" value="100" max="100">
+      </div>
+      <p id="progressTitle">Titre</p>
+        <p id="progressText">100%</p>
+        <progress id="progress" value="100" max="100">
+        </div>
   </main>
   <footer class="footer">
-    
+
     <ul class="social_list" id="social_list">
-      <li class="social_items social_active" >
-       
-        <svg  onclick="window.send('open','settings')" class="social_svg" width="40" height="40" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 489.802 489.802" style="enable-background:new 0 0 489.802 489.802;" xml:space="preserve">
+      <li class="social_items social_active">
+
+        <svg onclick="window.send('open','settings')" class="social_svg" width="40" height="40" version="1.1"
+          id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 489.802 489.802" style="enable-background:new 0 0 489.802 489.802;" xml:space="preserve">
           <g>
-            <path d="M20.701,281.901l32.1,0.2c4.8,24.7,14.3,48.7,28.7,70.5l-22.8,22.6c-8.2,8.1-8.2,21.2-0.2,29.4l24.6,24.9   c8.1,8.2,21.2,8.2,29.4,0.2l22.8-22.6c21.6,14.6,45.5,24.5,70.2,29.5l-0.2,32.1c-0.1,11.5,9.2,20.8,20.7,20.9l35,0.2   c11.5,0.1,20.8-9.2,20.9-20.7l0.2-32.1c24.7-4.8,48.7-14.3,70.5-28.7l22.6,22.8c8.1,8.2,21.2,8.2,29.4,0.2l24.9-24.6   c8.2-8.1,8.2-21.2,0.2-29.4l-22.6-22.8c14.6-21.6,24.5-45.5,29.5-70.2l32.1,0.2c11.5,0.1,20.8-9.2,20.9-20.7l0.2-35   c0.1-11.5-9.2-20.8-20.7-20.9l-32.1-0.2c-4.8-24.7-14.3-48.7-28.7-70.5l22.8-22.6c8.2-8.1,8.2-21.2,0.2-29.4l-24.6-24.9   c-8.1-8.2-21.2-8.2-29.4-0.2l-22.8,22.6c-21.6-14.6-45.5-24.5-70.2-29.5l0.2-32.1c0.1-11.5-9.2-20.8-20.7-20.9l-35-0.2   c-11.5-0.1-20.8,9.2-20.9,20.7l-0.3,32.1c-24.8,4.8-48.8,14.3-70.5,28.7l-22.6-22.8c-8.1-8.2-21.2-8.2-29.4-0.2l-24.8,24.6   c-8.2,8.1-8.2,21.2-0.2,29.4l22.6,22.8c-14.6,21.6-24.5,45.5-29.5,70.2l-32.1-0.2c-11.5-0.1-20.8,9.2-20.9,20.7l-0.2,35   C-0.099,272.401,9.201,281.801,20.701,281.901z M179.301,178.601c36.6-36.2,95.5-35.9,131.7,0.7s35.9,95.5-0.7,131.7   s-95.5,35.9-131.7-0.7S142.701,214.801,179.301,178.601z"/>
+            <path
+              d="M20.701,281.901l32.1,0.2c4.8,24.7,14.3,48.7,28.7,70.5l-22.8,22.6c-8.2,8.1-8.2,21.2-0.2,29.4l24.6,24.9   c8.1,8.2,21.2,8.2,29.4,0.2l22.8-22.6c21.6,14.6,45.5,24.5,70.2,29.5l-0.2,32.1c-0.1,11.5,9.2,20.8,20.7,20.9l35,0.2   c11.5,0.1,20.8-9.2,20.9-20.7l0.2-32.1c24.7-4.8,48.7-14.3,70.5-28.7l22.6,22.8c8.1,8.2,21.2,8.2,29.4,0.2l24.9-24.6   c8.2-8.1,8.2-21.2,0.2-29.4l-22.6-22.8c14.6-21.6,24.5-45.5,29.5-70.2l32.1,0.2c11.5,0.1,20.8-9.2,20.9-20.7l0.2-35   c0.1-11.5-9.2-20.8-20.7-20.9l-32.1-0.2c-4.8-24.7-14.3-48.7-28.7-70.5l22.8-22.6c8.2-8.1,8.2-21.2,0.2-29.4l-24.6-24.9   c-8.1-8.2-21.2-8.2-29.4-0.2l-22.8,22.6c-21.6-14.6-45.5-24.5-70.2-29.5l0.2-32.1c0.1-11.5-9.2-20.8-20.7-20.9l-35-0.2   c-11.5-0.1-20.8,9.2-20.9,20.7l-0.3,32.1c-24.8,4.8-48.8,14.3-70.5,28.7l-22.6-22.8c-8.1-8.2-21.2-8.2-29.4-0.2l-24.8,24.6   c-8.2,8.1-8.2,21.2-0.2,29.4l22.6,22.8c-14.6,21.6-24.5,45.5-29.5,70.2l-32.1-0.2c-11.5-0.1-20.8,9.2-20.9,20.7l-0.2,35   C-0.099,272.401,9.201,281.801,20.701,281.901z M179.301,178.601c36.6-36.2,95.5-35.9,131.7,0.7s35.9,95.5-0.7,131.7   s-95.5,35.9-131.7-0.7S142.701,214.801,179.301,178.601z" />
           </g>
-          </svg>
-        </li>
+        </svg>
+      </li>
       <li class="social_items social_active"><svg width="40" height="40" class="social_svg" style=" fill:#161616;"
           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20" fill-rule="evenodd" clip-rule="evenodd">
           <path
@@ -86,10 +101,21 @@
   window.on = (channel, callback) => {
     ipcRenderer.on(channel, (ev, data) => { callback(data) });
   }
-
+  window.on("progress.title", (title) => {
+    document.getElementById("progressTitle").innerText = title;
+  })
+  window.on("progress.progress", (progress) => {
+    document.getElementById("progressText").innerText = parseInt(progress) + "%";
+    document.getElementById("progress").value = parseInt(progress);
+  })
+  window.on("progress.total", (progress) => {
+    document.getElementById("progressTotal").value = progress[0];
+    document.getElementById("progressTotal").max = parseInt(progress[1]);
+    document.getElementById("progressTotalText").innerText=`Total (${progress[0]}/${progress[1]})`
+  })
   document.getElementById("close-btn").addEventListener("click", function (e) {
     window.close();
-  }); 
+  });
 
   // Some data that will be sent to the main process
 

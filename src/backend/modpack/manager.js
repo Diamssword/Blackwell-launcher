@@ -43,7 +43,7 @@ async function readyLaunch(auths)
 function getJavaPath()
 {
     return new Promise((res,err)=>{
-        let path=jSettings.get("path");
+        let path=jSettings.get("javaPath");
         if(!path || path.length<2)
         path="default";
         if(path =="default")
