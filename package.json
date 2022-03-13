@@ -41,6 +41,7 @@
     "bent": "^7.3.12",
     "electron-squirrel-startup": "^1.0.0",
     "find-java-home": "^1.2.2",
+    "jquery": "^3.6.0",
     "md5-file": "^5.0.0",
     "minecraft-launcher-core": "^3.16.8",
     "msmc": "^3.0.0-pre0",

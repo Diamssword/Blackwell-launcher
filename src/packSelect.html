@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Packs</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./css/packSelect.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+
+<body style="padding-top:5em; background:rgba(0,0,0,0.05);">
+    <h1 style="text-align: center">Packs</h1>
+    <div id="slider">
+      <a href="#" class="control_next">></a>
+      <a href="#" class="control_prev"><</a>
+      <ul id="PackList">
+      </ul>  
+    </div>
+    
+    
+    
+</body>
+<script>
+    const { ipcRenderer } = require('electron');
+    window.$ = window.jQuery = require('jquery');
+    window.send = (channel, msg) => {
+        ipcRenderer.send(channel, msg)
+    }
+    window.on = (channel, callback) => {
+        ipcRenderer.on(channel, (ev, ...data) => { callback(...data) });
+    }
+    function setParams(key, value) {
+        let obj = {};
+        obj[key] = value;
+        window.send('setParams', obj);
+    }
+    window.send("getPacks","");
+  window.on("getPacks", (packs) => {
+    let ul=document.getElementById("PackList");
+    ul.innerHTML="";
+    let li=document.createElement("li");
+    
+    li.innerHTML=`<input type="text" placeholder="Ajouter un pack"><button>Ajouter</button>`;
+    li.id="addPack";
+        ul.append(li)
+      for(k in packs)
+      {
+          console.log(packs[k])
+        let li=document.createElement("li");
+        li.id=packs[k].id;
+        let desc=document.createElement("div");
+        desc.classList.add("description");
+        desc.innerHTML=`  <h1>${packs[k].name}</h1>
+                <h2>${packs[k].minecraft}</h2>
+                <p> ${packs[k].desc}</p>`;
+
+        li.innerHTML=`<div class="blog-card">
+            <div class="meta" >
+              <div class="photo" style="background-image: url(${packs[k].icon})"></div>
+            </div>
+        </div>`;
+        ul.append(li)
+        li.getElementsByClassName("blog-card")[0].append(desc);
+        let bt = document.createElement("button");
+        bt.addEventListener('click',(ev)=>{
+          installPack(packs[k],ev.target)
+        })
+        bt.innerText=packs[k].dir?"Supprimer":"Installer";
+        desc.append(bt);
+  
+      }
+      recalcSliders();
+      if( $('#slider ul li:last-child').get()[0].id=="addPack" && move)
+        move()
+  });
+  function installPack(pack,bt)
+  {
+    if(pack.dir)
+    {
+      console.log(pack.id)
+      window.send("deletePack",pack.id)
+    bt.innerText="Installer";
+      delete  pack.dir;
+    }
+    else
+    {
+
+      window.send("installPack",pack.id)
+    bt.innerText="Supprimer";
+    pack.dir=pack.id
+    }
+  }
+</script>
+<script>
+var slideCount,slideWidth,slideHeight,sliderUlWidth
+function recalcSliders()
+{
+
+  slideCount = $('#slider ul li').length;
+  slideWidth = $('#slider ul li').width();
+  slideHeight = $('#slider ul li').height();
+  sliderUlWidth = slideCount * slideWidth;
+  $('#slider').css({ width: slideWidth, height: slideHeight });
+  $('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+  $('#slider ul li:last-child').prependTo('#slider ul');
+}
+var move;
+    jQuery(document).ready(function ($) {
+        recalcSliders()
+
+  function moveLeft() {
+      $('#slider ul').animate({
+          left: + slideWidth
+      }, 200, function () {
+          $('#slider ul li:last-child').prependTo('#slider ul');
+          $('#slider ul').css('left', '');
+      });
+  };
+
+  function moveRight() {
+      $('#slider ul').animate({
+          left: - slideWidth
+      }, 200, function () {
+          $('#slider ul li:first-child').appendTo('#slider ul');
+          $('#slider ul').css('left', '');
+      });
+  };
+move=moveRight;
+  $('a.control_prev').click(function () {
+      moveLeft();
+  });
+
+  $('a.control_next').click(function () {
+      moveRight();
+  });
+
+});    
+
+</script>
+</html>

@@ -37,6 +37,24 @@ ipcMain.on('open', (event, arg) => {
           settingsWin.loadFile(path.join(__dirname, "../settings.html"));
           
     }
+    else  if(arg=="packs")
+    {
+       var packsWin = new BrowserWindow({
+            width: 800,
+            height: 600,
+            frame: false,
+            webPreferences: {
+              nodeIntegration: true,
+              contextIsolation: false,
+          }
+          });
+        
+          packsWin.setResizable(false);
+     //     settingsWin.setMenu(null);
+          
+        packsWin.loadFile(path.join(__dirname, "../packSelect.html"));
+          
+    }
 });
 
 

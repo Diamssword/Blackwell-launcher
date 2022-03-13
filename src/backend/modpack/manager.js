@@ -2,6 +2,7 @@ const path = require("path");
 const game = require("../game");
 const fs= require("fs");
 const jSettings= require("../settings");
+const packMan= require("../packsManager");
 module.exports={
     readyLaunch,
     getForgeDlLink
@@ -14,11 +15,11 @@ async function readyLaunch(auths)
     let rlPath=path.join(__dirname, '..','..','modpack.json');
     if(!fs.existsSync(rlPath))                  //load file on compiled environement
        rlPath= path.join(process.resourcesPath, 'modpack.json')
-    let source=JSON.parse(fs.readFileSync(rlPath));
+       let source= packMan.getPack();
     try{
-    const loader =require("./loaderTypes/"+source.type);
+    const loader =require("./loaderTypes/"+source.loader);
     if(loader)
-    loader(source,(opts)=>{
+    loader.load(source,(opts)=>{
         if(!jpath.endsWith("java.exe"))
         opts.javaPath=path.join(jpath,"bin","java.exe");
         else
@@ -31,12 +32,16 @@ async function readyLaunch(auths)
                 opts.memory.max=ram+"G";
             }
         }
+        
+        progress.total(1, 1);
+        progress.title("Lancement!")
+        progress.value(100);
         game.launch(auths,opts)
     });
     }catch(err)
     {
         console.log(err)
-        console.log("PackLoaderException: can't find type '"+source.type+"' loader!")
+        console.log("PackLoaderException: can't find type '"+source.loader+"' loader!")
     }
     
 }

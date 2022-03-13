@@ -46,7 +46,11 @@ module.exports = class ProfileManager {
       let profile = this.profiles[this.selectedProfile];
       let promise;
       if (profile.isMicrosoft == true)
-        promise = msmcRefresh(profile);
+        promise = msmcRefresh(profile,(up)=>{
+          progress.total(1, 1);
+          progress.title("Authentification...")
+          progress.value(up.percent);
+        });
       else
         promise = Authenticator.refreshAuth(profile.access_token, profile.client_token, profile);
       promise.then((success) => {

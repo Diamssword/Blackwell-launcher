@@ -19,6 +19,8 @@ const ProfileManager =require('./backend/auth');
 let manager=new ProfileManager((err)=>{console.log(err)});
 global.profileManager=manager;
 manager.loadProfiles();
+require("./backend/packsManager").getPacks();
+require("./backend/packsManager").initCom();
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -85,3 +87,5 @@ value:(progress)=>
 total:(etape,total)=>{
   global.send("progress.total",[etape,total]);
 }}
+
+

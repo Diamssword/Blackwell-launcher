@@ -18,7 +18,7 @@ var concerned = [];
  * @param {*} mainFile 
  * @param {*} launchcallback with passed launchconfig
  */
-module.exports = (confFile, launchcallback) => {
+module.exports ={load:(confFile, launchcallback) => {
 
     callback = launchcallback;
     util.fetch(confFile.url).then((res) => {
@@ -26,12 +26,31 @@ module.exports = (confFile, launchcallback) => {
         route = path.join(global.launcherDir, "instances", mainFile.profile.id);
         if (!fs.existsSync(route))
             fs.mkdirSync(route);
-        downloadFiles()
+        downloadFiles();
     }, (err) => {
         console.log(err);
     })
+},
+get:(confFile)=>{
+    return new Promise((res,rej)=>{
+        util.fetch(confFile.url).then((res1) => {
+            let data={
+               name:res1.install.name,
+               minecraft:res1.install.minecraft,
+               desc:res1.install.desc,
+               icon:res1.install.icon,
+               id:res1.profile.id,
+               url:confFile.url,
+               loader:"forge"
+            }
+            res(data);
+        }, (err) => {
+            rej(err);
+        })
+    });
+  
 }
-
+}
 function downloadFiles() {
     progress.title("Checking Files...");
     progress.value(10);
@@ -122,7 +141,6 @@ async function dlFiles(noCheckNeeded) {
     var counterFiles = 0;
     progress.total(counterFiles, totalOfFiles);
     for (k in md5Map) {
-
         if (!noCheckNeeded.includes(k)) {
             const md5 = k;
             treating.push(md5);
