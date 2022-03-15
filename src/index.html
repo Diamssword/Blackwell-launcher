@@ -50,10 +50,10 @@
       <div>
         <div style="display: none;" id="progress-container">
           <p id="progressTotalText">Total (1/1)</p>
-          <progress id="progressTotal" value="100" max="100" />
+          <progress id="progressTotal" value="100" max="100" ></progress>
           <p id="progressTitle">Titre</p>
           <p id="progressText">100%</p>
-          <progress id="progress" value="100" max="100" />
+          <progress id="progress" value="100" max="100" ></progress>
         </div>
       </div>
     </div>
@@ -113,14 +113,22 @@
     ipcRenderer.on(channel, (ev, ...data) => { callback(...data) });
   }
   window.on("progress.title", (title) => {
-    document.querySelector(".progress-container").style.display = 'block';
+    document.getElementById("progress-container").style.display = 'block';
     document.getElementById("progressTitle").innerText = title;
   })
   window.on("progress.progress", (progress) => {
+    if(isNaN(progress))
+      progress=0;
+    document.getElementById("progress-container").style.display = 'block';
     document.getElementById("progressText").innerText = parseInt(progress) + "%";
     document.getElementById("progress").value = parseInt(progress);
   })
   window.on("progress.total", (progress) => {
+    if(isNaN(progress[0]))
+      progress[0]=0;
+      if(isNaN(progress[1]))
+      progress[1]=0;
+    document.getElementById("progress-container").style.display = 'block';
     document.getElementById("progressTotal").value = progress[0];
     document.getElementById("progressTotal").max = parseInt(progress[1]);
     document.getElementById("progressTotalText").innerText = `Total (${progress[0]}/${progress[1]})`
