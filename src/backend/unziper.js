@@ -1,5 +1,4 @@
 
-var yauzl = require("yauzl"); // replace with: var yauzl = require("yauzl");
 var path = require("path");
 var fs = require("fs");
 var Transform = require("stream").Transform;
