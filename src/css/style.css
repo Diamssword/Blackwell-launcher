@@ -50,8 +50,8 @@ body {
 .header {
   z-index        : 8;
   position       : absolute;
-  bottom         : 10px;
-  right          : 40px;
+  bottom         : 30px;
+  right          : 70px;
   height         : 40vh;
   width          : 20vw;
   display        : flex;
@@ -160,7 +160,7 @@ body {
   width: 30em;
 }
 
-footer {
+.footer {
   position       : absolute;
   bottom         : 0;
   left           : 0;
@@ -171,6 +171,7 @@ footer {
   align-items    : center;
   color          : var(--normal-state-color);
 }
+
 
 .social_list {
   z-index       : 3;
@@ -217,4 +218,8 @@ input {
   font-family   : "Futura Condensed";
   padding-top:-6px;
   cursor: pointer;
+}
+
+progress{
+  width: 100%;
 }

@@ -7,30 +7,33 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="css/compiled.css">
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 
 </head>
 
 <body id="body">
   <div id="packSelect">
-  <p>Pack</p>
-  <select>
-    <option value="">A</option>
-    <option value="">B</option>
-  </select>
-</div>
+    <p>Pack</p>
+    <select>
+      <option value="">A</option>
+      <option value="">B</option>
+    </select>
+  </div>
   <header class="header">
     <nav class="navigation">
       <h1 class="title">Méthode de connexion :</h1>
       <ul class="nav_list" id="nav_list">
-            <li class="nav_items"><input type="button" value="MICROSOFT" class=""
-                onclick="window.send('open','microsoft')" /></li>
-            <li class="nav_items active"> <input type="button" value="Rejoindre l'université !" class=""
-                onclick="window.send('launch')" />
-            </li>
-            <li class="nav_items"> <input id="close-btn" type="button" value="QUITTER" class="" />
-            </li>
+        <li class="nav_items"><input type="button" value="MICROSOFT" class=""
+            onclick="window.send('open','microsoft')" /></li>
+        <li class="nav_items active"> <input type="button" value="Rejoindre l'université !" class=""
+            onclick="window.send('launch')" />
+        </li>
+        <li class="nav_items"> <input id="close-btn" type="button" value="QUITTER" class="" />
+        </li>
       </ul>
     </nav>
   </header>
@@ -45,14 +48,16 @@
       <div id="ProfilePicker" class="profile_picker">
       </div>
       <div>
-        <p id="progressTotalText">Total (1/1)</p>
-      <progress id="progressTotal" value="100" max="100">
-      </div>
-      <p id="progressTitle">Titre</p>
-        <p id="progressText">100%</p>
-        <progress id="progress" value="100" max="100">
+        <div style="display: none;" id="progress-container">
+          <p id="progressTotalText">Total (1/1)</p>
+          <progress id="progressTotal" value="100" max="100" />
+          <p id="progressTitle">Titre</p>
+          <p id="progressText">100%</p>
+          <progress id="progress" value="100" max="100" />
         </div>
-        <button onclick="window.send('open','packs')">Packs</button>
+      </div>
+    </div>
+    <button onclick="window.send('open','packs')" class="btn btn-outline-dark">Packs</button>
   </main>
   <footer class="footer">
 
@@ -108,6 +113,7 @@
     ipcRenderer.on(channel, (ev, ...data) => { callback(...data) });
   }
   window.on("progress.title", (title) => {
+    document.querySelector(".progress-container").style.display = 'block';
     document.getElementById("progressTitle").innerText = title;
   })
   window.on("progress.progress", (progress) => {
@@ -117,41 +123,38 @@
   window.on("progress.total", (progress) => {
     document.getElementById("progressTotal").value = progress[0];
     document.getElementById("progressTotal").max = parseInt(progress[1]);
-    document.getElementById("progressTotalText").innerText=`Total (${progress[0]}/${progress[1]})`
+    document.getElementById("progressTotalText").innerText = `Total (${progress[0]}/${progress[1]})`
   })
   document.getElementById("close-btn").addEventListener("click", function (e) {
     window.close();
   });
   window.send("getSelectPack");
-  window.on("getSelectPack",(packs,selected)=>{
-    refreshPacks(packs,selected? selected[0]:undefined);
+  window.on("getSelectPack", (packs, selected) => {
+    refreshPacks(packs, selected ? selected[0] : undefined);
   })
-function refreshPacks(packs,selected)
-{
-  
-  let div=document.getElementById("packSelect")
-  div.innerHTML="";
-  if(packs.length>1)
-  {
-  let p=document.createElement("p");
-  p.innerText="Pack:"
-  div.append(p);
-  let sel=document.createElement("select");
-  for(k in packs)
-  {
-    let op=document.createElement("option");
-    op.value=packs[k].id;
-    op.innerText=packs[k].name;
-    if(packs[k].id==selected)
-      op.selected=true;
-      sel.append(op);
+  function refreshPacks(packs, selected) {
+
+    let div = document.getElementById("packSelect")
+    div.innerHTML = "";
+    if (packs.length > 1) {
+      let p = document.createElement("p");
+      p.innerText = "Pack:"
+      div.append(p);
+      let sel = document.createElement("select");
+      for (k in packs) {
+        let op = document.createElement("option");
+        op.value = packs[k].id;
+        op.innerText = packs[k].name;
+        if (packs[k].id == selected)
+          op.selected = true;
+        sel.append(op);
+      }
+      sel.addEventListener("click", (ev) => {
+        window.send("selectPack", ev.target.value);
+      })
+      div.append(sel);
+    }
   }
-  sel.addEventListener("click",(ev)=>{
-    window.send("selectPack",ev.target.value);
-  })
-  div.append(sel);
-  }
-}
   // Some data that will be sent to the main process
 
 
@@ -172,7 +175,7 @@ function refreshPacks(packs,selected)
 <script src="js/PackPicker.js"></script>
 <script>
   var profilePicker;
-  var packPicker ;
+  var packPicker;
   window.send("requestProfiles", "")
   window.on("getProfiles", (prof) => {
     profilePicker = new ProfilePicker(document.getElementById("ProfilePicker"), prof);
