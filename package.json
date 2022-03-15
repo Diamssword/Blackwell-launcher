@@ -46,7 +46,8 @@
     "minecraft-launcher-core": "^3.16.8",
     "msmc": "^3.0.0-pre0",
     "node-fetch": "2.0.0",
-    "node-fetch-progress": "^1.0.2"
+    "node-fetch-progress": "^1.0.2",
+    "yauzl": "^2.10.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.7",

@@ -49,7 +49,6 @@
     }
     var consoleOn=false;
     window.on("settings.get", (data) => {
-        console.log(data)
         if (data["javaPath"])
             document.getElementById("java").value = data["javaPath"]
         if (data["ram"])

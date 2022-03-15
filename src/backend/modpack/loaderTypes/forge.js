@@ -69,7 +69,6 @@ function downloadFiles() {
             prog.on("progress", (p) => { progress.value(parseInt(p.progress * 100)) })
             res.buffer().then(
                 buf => {
-                    console.log(buf.length);
                     fs.writeFile(path.join(route, forgeFile), buf, (err) => {
                         console.log(err)
 

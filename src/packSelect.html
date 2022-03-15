@@ -51,7 +51,6 @@
         ul.append(li)
       for(k in packs)
       {
-          console.log(packs[k])
         let li=document.createElement("li");
         li.id=packs[k].id;
         let desc=document.createElement("div");
@@ -85,7 +84,6 @@
   {
     if(pack.dir)
     {
-      console.log(pack.id)
       window.send("deletePack",pack.id)
     bt.innerText="Installer";
       delete  pack.dir;

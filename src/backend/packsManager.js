@@ -41,10 +41,13 @@ function getPacks() {
                     PACKS.push(val);
                     if(flag)
                     {
+                        if(INSTALLED.indexOf(val.id)==-1)
+                        {
                         INSTALLED.push(val.id);
                         settings.set("packsInstalled", INSTALLED);  
                         settings.set("packSelected",val.id);
                         settings.save()
+                        }
                     }
                     refresh();
                 })

@@ -14,7 +14,6 @@ function launch(auth,opts)
     opts.authorization=auth;
 
     let launcher=new mc();
-    console.log("Starting")
     launcher.launch(opts);
     
     launcher.on('debug', (e) => console.log(e));
