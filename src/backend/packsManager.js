@@ -30,6 +30,7 @@ function getPacks() {
     for (k in source) {
         try {
             const loader = require("./modpack/loaderTypes/" + source[k].type);
+          
             if (loader) {
                 loader.get(source[k]).then((val) => {
                     for (l in INSTALLED) {
@@ -50,7 +51,7 @@ function getPacks() {
                         }
                     }
                     refresh();
-                })
+                },(err)=>console.error(err))
             }
         } catch (err) {
             console.log(err)

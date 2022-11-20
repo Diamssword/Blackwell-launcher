@@ -13,6 +13,7 @@ async function readyLaunch(auths) {
         fs.mkdirSync(path.join(global.launcherDir, "instances"));
 
     let source = packMan.getPack();
+    console.log(source);
     var jpath = await getJavaPath(source.minecraft);
     console.info("JAVA PATH: ", jpath);
     let rlPath = path.join(__dirname, '..', '..', 'modpack.json');
