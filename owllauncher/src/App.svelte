@@ -1,13 +1,12 @@
 <script lang="ts">
     import { onMount } from "svelte";
-	import "neutralinojs-types"
+	import  "./types/neutralino"
 	export let name: string;
-	export let VARS;
 	var BACK: typeof Neutralino;
 	onMount(async ()=>{
-		for(let d in VARS)
+		for(let d in (window as any).VARS)
 		{
-			window[d]=VARS[d];
+			window[d]=(window as any).VARS[d];
 		}
 		BACK = (window as any).Neutralino;
 		BACK.init();
