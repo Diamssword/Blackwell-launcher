@@ -5,7 +5,6 @@ import {patchDevEnv} from "./devutils"
 import * as dotenv from 'dotenv'
 dotenv.config();
 var globals={};
-console.log(process.env)
 if(process.env.DEV) 
 {
 	patchDevEnv(globals);
